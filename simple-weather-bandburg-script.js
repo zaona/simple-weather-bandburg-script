@@ -80,3 +80,24 @@ gui.on('button:click', 'openBrowser', () => {
 gui.on('button:click', 'openGuide', () => {
     window.open('https://www.yuque.com/zaona/weather/script', '_blank')
 })
+
+// 打开插件时尝试启动快应用
+async function gotoapp() {
+    const log = sandbox.log
+    const wasm = sandbox.wasm
+    if (!sandbox.currentDevice) {
+        log('❌ 没有连接设备，请先连接设备')
+        return
+    }
+    const addr = sandbox.currentDevice.addr
+    try {
+        await wasm.thirdpartyapp_get_list(addr)
+        await wasm.thirdpartyapp_launch(addr, "com.application.zaona.weather", "")
+        log('✅ 已尝试启动快应用')
+    } catch (err) {
+        log('❌ 启动快应用失败: ' + err)
+    }
+}
+
+// 在脚本加载时调用
+gotoapp()
