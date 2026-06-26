@@ -78,7 +78,7 @@ gui.on('button:click', 'openBrowser', () => {
     window.open('https://weather.zaona.top/weather', '_blank')
 })
 gui.on('button:click', 'openGuide', () => {
-    window.open('https://www.yuque.com/zaona/weather/script', '_blank')
+    window.open('https://weather.zaona.top/', '_blank')
 })
 
 // 打开插件时尝试启动快应用
